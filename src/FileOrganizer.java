@@ -81,7 +81,7 @@ public class FileOrganizer {
             String archivePath = home + "/Archive";
             File f = new File(archivePath);
             if (!f.exists()) {
-                f.createNewFile();
+                f.mkdir();
             }
             moveFile(filepath, archivePath + "/" + filename);
         }
