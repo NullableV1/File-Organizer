@@ -14,14 +14,13 @@ public class FileOrganizer {
         System.out.println("Please wait a few seconds until the process complete");
         try {
             organizeFiles(path);
-            System.out.println("Files Moved Successfully !");
-        }catch (FileNotFoundException e ){
+        } catch (FileNotFoundException e) {
             System.out.println("Something went wrong :");
             e.printStackTrace();
-        }catch (IOException e ){
+        } catch (IOException e) {
             System.out.println("Something went wrong :");
             e.printStackTrace();
-        } catch(Exception e){
+        } catch (Exception e) {
             System.out.println("Something went wrong :");
             e.printStackTrace();
         }
@@ -50,30 +49,44 @@ public class FileOrganizer {
             System.exit(0);
         }
         File[] files = file.listFiles();
-        for (var f : files){
+        for (var f : files) {
             organizeFile(f);
         }
     }
 
-    private static void organizeFile(File file) throws IOException{
+    private static void organizeFile(File file) throws IOException {
         String filename = file.getName();
         String filepath = file.getAbsolutePath();
         String home = System.getProperty("user.home");
-        if (filename.contains(".jpg") || filename.contains(".png")) {
-
+        if (filename.contains(".jpg") || filename.contains(".png")
+                || filename.contains("jpeg") || filename.contains(".gif")
+        ) {
             moveFile(filepath, home + "/Pictures/" + filename);
-        } else if (filename.contains(".mp4")) {
+        } else if (filename.contains(".mp4") || filename.contains(".mov")
+                || filename.contains(".mkv")){
             moveFile(filepath, home + "/Videos/" + filename);
-        } else if (filename.contains(".mp3")) {
+        }
+        else if (filename.contains(".mp3") || filename.contains(".wav")
+                || filename.contains(".flac")
+        ) {
             moveFile(filepath, home + "/Music/" + filename);
-        } else if (filename.contains(".pdf") || filename.contains(".zip") ||
-                filename.contains(".rar") || filename.contains(".7z") ||
-                filename.contains(".xz") || filename.contains(".gz") ||
-                filename.contains(".txt")
+        } else if (filename.contains(".pdf") ||
+                filename.contains(".txt") || filename.contains(".docx")
         ) {
             moveFile(filepath, home + "/Documents/" + filename);
+        } else if (filename.contains(".zip") ||
+                filename.contains(".rar") || filename.contains(".7z") ||
+                filename.contains(".xz") || filename.contains(".gz")
+        ) {
+            String archivePath = home + "/Archive";
+            File f = new File(archivePath);
+            if (!f.exists()) {
+                f.createNewFile();
+            }
+            moveFile(filepath, archivePath + "/" + filename);
         }
     }
+
     private static void moveFile(String source, String des) throws IOException {
         File f2 = new File(des);
         File file = new File(source);
@@ -89,6 +102,4 @@ public class FileOrganizer {
         file.delete();
     }
 }
-
-
 
