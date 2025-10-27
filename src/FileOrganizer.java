@@ -35,7 +35,7 @@ public class FileOrganizer {
                 "╚═╝     ╚═╝╚══════╝╚══════╝\n" +
                 "                           ");
         System.out.println(BLUE + "┌───────────────────────────────────────┐");
-        System.out.println("│" + CYAN + "       File Organizer v1.0         " + BLUE + "│");
+        System.out.println("│" + CYAN + "       File Organizer v1.01         " + BLUE + "│");
         System.out.println("│" + CYAN + "       Made by Nullable | GitHub Acc : https://github.com/NullableV1   " + BLUE + "│");
         System.out.println("└───────────────────────────────────────┘" + RESET);
         System.out.println();
@@ -78,7 +78,7 @@ public class FileOrganizer {
                 filename.contains(".rar") || filename.contains(".7z") ||
                 filename.contains(".xz") || filename.contains(".gz")
         ) {
-            String archivePath = home + "/Archive";
+            String archivePath = home + "/Archives";
             File f = new File(archivePath);
             if (!f.exists()) {
                 f.mkdir();
