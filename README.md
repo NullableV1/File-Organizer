@@ -32,8 +32,7 @@ And More .....
 
 ###  Method 1: Using a JAR file (Recommended)
 
-Open a terminal in the same directory as the java file
-Creating the .class , .jar files : 
+Open a terminal in the same directory as the java file, create the .class , .jar files : 
 ```bash
 javac FileOrganizer.java
 jar cfe FileOrganizer.jar FileOrganizer FileOrganizer.class
