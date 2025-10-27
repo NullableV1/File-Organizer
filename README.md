@@ -35,7 +35,7 @@ And More .....
 Open a terminal in the same directory as the JAR file, and run :
 
 ```bash
-java -jar FileOrganizer.jar ~/Downloads
+java -jar FileOrganizer.jar 
 ```
 ### Method 2: Compile The Java File , Then run it
 ```bash
