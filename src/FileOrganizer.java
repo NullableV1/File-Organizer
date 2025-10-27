@@ -1,0 +1,94 @@
+import java.io.*;
+import java.util.Scanner;
+
+public class FileOrganizer {
+    private static final String BLUE = "\u001B[34m";
+    private static final String CYAN = "\u001B[36m";
+    private static final String RESET = "\u001B[0m";
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        printBanner();
+        System.out.println("Enter your path :");
+        String path = scanner.next();
+        System.out.println("Please wait a few seconds until the process complete");
+        try {
+            organizeFiles(path);
+            System.out.println("Files Moved Successfully !");
+        }catch (FileNotFoundException e ){
+            System.out.println("Something went wrong :");
+            e.printStackTrace();
+        }catch (IOException e ){
+            System.out.println("Something went wrong :");
+            e.printStackTrace();
+        } catch(Exception e){
+            System.out.println("Something went wrong :");
+            e.printStackTrace();
+        }
+    }
+
+    public static void printBanner() {
+        System.out.println("███████╗██╗██╗     ███████╗\n" +
+                "██╔════╝██║██║     ██╔════╝\n" +
+                "█████╗  ██║██║     █████╗  \n" +
+                "██╔══╝  ██║██║     ██╔══╝  \n" +
+                "██║     ██║███████╗███████╗\n" +
+                "╚═╝     ╚═╝╚══════╝╚══════╝\n" +
+                "                           ");
+        System.out.println(BLUE + "┌───────────────────────────────────────┐");
+        System.out.println("│" + CYAN + "       File Organizer v1.0         " + BLUE + "│");
+        System.out.println("│" + CYAN + "       Made by Nullable | GitHub Acc : https://github.com/NullableV1   " + BLUE + "│");
+        System.out.println("└───────────────────────────────────────┘" + RESET);
+        System.out.println();
+        System.out.println();
+    }
+
+    public static void organizeFiles(String path) throws IOException {
+        File file = new File(path);
+        if (!file.exists()) {
+            System.out.println("Incorrect Path, Please Retry !");
+            System.exit(0);
+        }
+        File[] files = file.listFiles();
+        for (var f : files){
+            organizeFile(f);
+        }
+    }
+
+    private static void organizeFile(File file) throws IOException{
+        String filename = file.getName();
+        String filepath = file.getAbsolutePath();
+        String home = System.getProperty("user.home");
+        if (filename.contains(".jpg") || filename.contains(".png")) {
+
+            moveFile(filepath, home + "/Pictures/" + filename);
+        } else if (filename.contains(".mp4")) {
+            moveFile(filepath, home + "/Videos/" + filename);
+        } else if (filename.contains(".mp3")) {
+            moveFile(filepath, home + "/Music/" + filename);
+        } else if (filename.contains(".pdf") || filename.contains(".zip") ||
+                filename.contains(".rar") || filename.contains(".7z") ||
+                filename.contains(".xz") || filename.contains(".gz") ||
+                filename.contains(".txt")
+        ) {
+            moveFile(filepath, home + "/Documents/" + filename);
+        }
+    }
+    private static void moveFile(String source, String des) throws IOException {
+        File f2 = new File(des);
+        File file = new File(source);
+        FileInputStream input = new FileInputStream(file);
+        FileOutputStream output = new FileOutputStream(f2);
+        byte[] buffer = new byte[1024];
+        int bytesRead;
+        while ((bytesRead = input.read(buffer)) != -1) {
+            output.write(buffer, 0, bytesRead);
+        }
+        input.close();
+        output.close();
+        file.delete();
+    }
+}
+
+
+
