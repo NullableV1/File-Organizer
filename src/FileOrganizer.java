@@ -88,6 +88,7 @@ public class FileOrganizer {
     }
 
     private static void moveFile(String source, String des) throws IOException {
+        if (source == des) return;
         File f2 = new File(des);
         File file = new File(source);
         FileInputStream input = new FileInputStream(file);
@@ -99,7 +100,9 @@ public class FileOrganizer {
         }
         input.close();
         output.close();
-        file.delete();
+        if (!file.equals(f2)) {
+            file.delete();
+        }
     }
 }
 
