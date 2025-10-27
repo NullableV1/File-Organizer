@@ -40,5 +40,5 @@ java -jar FileOrganizer.jar
 ### Method 2: Compile The Java File , Then run it
 ```bash
 javac FileOrganizer.java
-java FileOrganizer /path/to/directory
+java FileOrganizer 
 ```
